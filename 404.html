@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إعادة توجيه</title>
-    <script>
-        sessionStorage.redirect = window.location.pathname + window.location.search + window.location.hash;
-        window.location.replace('/');
-    </script>
+    <title>جاري التحميل...</title>
+    <style>
+        body { background: #0b2f3a; color: #ffd966; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Cairo', sans-serif; }
+    </style>
 </head>
 <body>
-    <p style="color:white; text-align:center; margin-top:20%;">جاري إعادة التوجيه...</p>
+    <p>جاري تحميل التهنئة...</p>
+    <script>
+        // حفظ المسار الكامل (مع أي معاملات)
+        sessionStorage.redirect = window.location.pathname + window.location.search + window.location.hash;
+        // التوجيه إلى الصفحة الرئيسية
+        window.location.replace('/');
+    </script>
 </body>
 </html>
