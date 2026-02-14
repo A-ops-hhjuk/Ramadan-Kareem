@@ -74,17 +74,16 @@
             100% { transform: rotate(45deg) translateY(-20px); }
         }
 
-        /* فوانيس متحركة (4) */
+        /* فوانيس متحركة */
         .lantern-bottom-left {
             position: fixed;
             bottom: 20px;
             left: 10px;
             font-size: 3rem;
             color: #ffd966;
-            z-index: 999;
+            z-index: 0;
             animation: swingLeft 3s infinite alternate;
             filter: drop-shadow(0 0 10px orange);
-
         }
 
         .lantern-bottom-right {
@@ -96,7 +95,6 @@
             z-index: 0;
             animation: swingRight 3s infinite alternate;
             filter: drop-shadow(0 0 10px orange);
-            z-index: 999;
         }
 
         .lantern-top-left {
@@ -108,9 +106,7 @@
             z-index: 0;
             animation: swingLeft 2.5s infinite alternate-reverse;
             filter: drop-shadow(0 0 8px orange);
-            z-index: 999;
         }
-        
 
         .lantern-top-right {
             position: fixed;
@@ -121,7 +117,6 @@
             z-index: 0;
             animation: swingRight 2.5s infinite alternate-reverse;
             filter: drop-shadow(0 0 8px orange);
-            z-index: 999;
         }
 
         @keyframes swingLeft {
@@ -144,7 +139,10 @@
             position: fixed;
             top: 16px;
             right: 16px;
-            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 20;
         }
 
         #soundToggle {
@@ -165,6 +163,23 @@
         #soundToggle:hover {
             background: #ffd966;
             color: #0b2a35;
+        }
+
+        .sound-message {
+            background: rgba(0,0,0,0.7);
+            color: #ffd966;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            border: 1px solid #ffd966;
+            backdrop-filter: blur(4px);
+            white-space: nowrap;
+            animation: fadeInOut 3s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%,100% { opacity: 0.7; }
+            50% { opacity: 1; }
         }
 
         .container {
@@ -191,7 +206,7 @@
         }
 
         .names-list {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: #ffd966;
             background: rgba(0,0,0,0.3);
@@ -257,7 +272,6 @@
             100% { color: #ffe4b5; text-shadow: 0 0 5px red; }
         }
 
-        /* تحسين صندوق الدعاء */
         .dua-text {
             font-size: 1.4rem;
             line-height: 1.7;
@@ -375,7 +389,10 @@
     <div class="moon"></div>
 
     <!-- فوانيس متحركة -->
-    <div class="lantern-top-left"><i class="fas fa-mosque"></i></div>
+    <div class="lantern-bottom-left"><i class="fas fa-lamp"></i></div>
+    <div class="lantern-bottom-right"><i class="fas fa-mosque"></i></div>
+    <div class="lantern-top-left"><i class="fas fa-moon"></i></div>
+    <div class="lantern-top-right"><i class="fas fa-star"></i></div>
 
     <!-- عنصر الصوت وزر التحكم -->
     <audio id="ramadanSong" preload="auto" loop>
@@ -384,8 +401,9 @@
 
     <div class="sound-control">
         <div id="soundToggle">
-            <i class="fas fa-volume-up" id="soundIcon"></i>
+            <i class="fas fa-volume-mute" id="soundIcon"></i>
         </div>
+        <div class="sound-message" id="soundMessage">🔊 انقر لتشغيل الصوت</div>
     </div>
 
     <div class="container">
@@ -427,32 +445,30 @@
         launchConfetti();
         setInterval(launchConfetti, 2500);
 
-        // ---------- الصوت ----------
+        // ---------- الصوت (معطل افتراضياً مع رسالة) ----------
         const song = document.getElementById('ramadanSong');
         const soundIcon = document.getElementById('soundIcon');
-        let soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
+        const soundMessage = document.getElementById('soundMessage');
+        let soundEnabled = false;
 
         function updateSoundUI() {
             soundIcon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
+            if (soundEnabled) {
+                soundMessage.style.display = 'none';
+            } else {
+                soundMessage.style.display = 'block';
+            }
         }
 
         document.getElementById('soundToggle').addEventListener('click', () => {
             soundEnabled = !soundEnabled;
-            localStorage.setItem('soundEnabled', soundEnabled);
             updateSoundUI();
             if (soundEnabled) {
-                song.play().catch(e => console.log('تشغيل الصوت يحتاج تفاعل'));
+                song.play().catch(e => console.log('تشغيل الصوت'));
             } else {
                 song.pause();
             }
         });
-
-        document.body.addEventListener('click', function initAudio() {
-            if (soundEnabled) {
-                song.play().catch(() => {});
-            }
-            document.body.removeEventListener('click', initAudio);
-        }, { once: true });
 
         updateSoundUI();
 
@@ -486,7 +502,6 @@
                 else if (parts.length > 2) displayNames = parts.slice(0, -1).join('، ') + ' و ' + parts.slice(-1);
             }
 
-            // اختيار كلمة التهنئة حسب الجندر
             const greetingWord = gender === 'male' ? 'يهنئكم' : 'تهنئكم';
             const fixedPhrase = 'أعاده الله علينا وعليكم بالخير واليمن والبركات';
 
@@ -503,7 +518,7 @@
                 </div>
             `;
 
-            // زر النسخ
+            // زر النسخ مع رسالة توضيحية عن الرابط
             const shareActions = document.getElementById('shareActions');
             const currentUrl = window.location.href;
 
@@ -512,7 +527,7 @@
             copyBtn.innerHTML = '<i class="fas fa-copy"></i> نسخ الرابط';
             copyBtn.addEventListener('click', () => {
                 navigator.clipboard.writeText(currentUrl).then(() => {
-                    alert('تم نسخ الرابط!');
+                    alert('✅ تم نسخ الرابط!\n"قم بمشاركة الرابط مع أصدقائك ليتمكنوا من رؤية تهنئتك."');
                 }).catch(() => {
                     alert('فشل النسخ، يمكنك نسخ الرابط يدوياً.');
                 });
