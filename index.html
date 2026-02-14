@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>صانع تهنئة رمضان</title>
-    <!-- SEO -->
-    <meta name="description" content="أنشئ تهنئة رمضانية مخصصة وشاركها مع أحبابك">
+    <title>تهنئة رمضان</title>
     <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -438,10 +436,362 @@
             font-size: 0.8rem;
             opacity: 0.8;
         }
+         /* خلفية نجوم متحركة */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* هلال محسن */
+        .moon {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            width: 120px;
+            height: 120px;
+            background: transparent;
+            border-radius: 50%;
+            box-shadow: -25px 12px 0 0 rgba(255, 215, 0, 0.6);
+            transform: rotate(45deg);
+            z-index: 0;
+            animation: floatMoon 8s infinite alternate;
+            filter: drop-shadow(0 0 20px gold);
+        }
+
+        @keyframes floatMoon {
+            0% { transform: rotate(45deg) translateY(0); }
+            100% { transform: rotate(45deg) translateY(-20px); }
+        }
+
+        /* فوانيس متحركة */
+        .lantern-bottom-left {
+            position: fixed;
+            bottom: 20px;
+            left: 10px;
+            font-size: 3rem;
+            color: #ffd966;
+            z-index: 0;
+            animation: swingLeft 3s infinite alternate;
+            filter: drop-shadow(0 0 10px orange);
+        }
+
+        .lantern-bottom-right {
+            position: fixed;
+            bottom: 20px;
+            right: 10px;
+            font-size: 3rem;
+            color: #ffd966;
+            z-index: 0;
+            animation: swingRight 3s infinite alternate;
+            filter: drop-shadow(0 0 10px orange);
+        }
+
+        .lantern-top-left {
+            position: fixed;
+            top: 20px;
+            left: 10px;
+            font-size: 2.5rem;
+            color: #ffd966;
+            z-index: 0;
+            animation: swingLeft 2.5s infinite alternate-reverse;
+            filter: drop-shadow(0 0 8px orange);
+        }
+
+        .lantern-top-right {
+            position: fixed;
+            top: 20px;
+            right: 10px;
+            font-size: 2.5rem;
+            color: #ffd966;
+            z-index: 0;
+            animation: swingRight 2.5s infinite alternate-reverse;
+            filter: drop-shadow(0 0 8px orange);
+        }
+
+        @keyframes swingLeft {
+            0% { transform: translateX(0) rotate(0deg); }
+            100% { transform: translateX(-10px) rotate(-5deg); }
+        }
+
+        @keyframes swingRight {
+            0% { transform: translateX(0) rotate(0deg); }
+            100% { transform: translateX(10px) rotate(5deg); }
+        }
+
+        body.bg1 { background: linear-gradient(145deg, #0b2a35, #1a4d5e); }
+        body.bg2 { background: linear-gradient(145deg, #4a1e2c, #972b3f); }
+        body.bg3 { background: linear-gradient(145deg, #1e4a3a, #2e8b57); }
+        body.bg4 { background: linear-gradient(145deg, #5e3a1e, #b8860b); }
+        body.bg5 { background: linear-gradient(145deg, #2c3e50, #3498db); }
+
+        .sound-control {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 20;
+        }
+
+        #soundToggle {
+            background: rgba(0,0,0,0.3);
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid #ffd966;
+            transition: 0.2s;
+            font-size: 1.2rem;
+            backdrop-filter: blur(4px);
+        }
+
+        #soundToggle:hover {
+            background: #ffd966;
+            color: #0b2a35;
+        }
+
+        .sound-message {
+            background: rgba(0,0,0,0.7);
+            color: #ffd966;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            border: 1px solid #ffd966;
+            backdrop-filter: blur(4px);
+            white-space: nowrap;
+            animation: fadeInOut 3s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%,100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 380px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 20px 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,215,0,0.3);
+            position: relative;
+            z-index: 1;
+            margin-top: 2px;
+        }
+
+        .greeting-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 28px;
+            padding: 20px 16px;
+            margin-bottom: 20px;
+            border: 2px solid #ffd966;
+            text-align: center;
+        }
+
+        .names-list {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #ffd966;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 18px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 8px;
+            border: 1px solid #ffd966;
+            animation: colorChange1 3s infinite, glow 2s infinite;
+        }
+
+        @keyframes colorChange1 {
+            0% { color: #ffe4b5; text-shadow: 0 0 5px red; }
+            25% { color: #ffb5b5; text-shadow: 0 0 5px blue; }
+            50% { color: #b5ffb5; text-shadow: 0 0 5px green; }
+            75% { color: #b5b5ff; text-shadow: 0 0 5px yellow; }
+            100% { color: #ffe4b5; text-shadow: 0 0 5px red; }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #ffd966; }
+            50% { text-shadow: 0 0 20px #ffd966, 0 0 30px #ffaa00; }
+            100% { text-shadow: 0 0 5px #ffd966; }
+        }
+
+        h1 {
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        h1 i {
+            color: #ffd966;
+            font-size: 1.8rem;
+            animation: starDance 2s infinite alternate;
+        }
+
+        @keyframes starDance {
+            0% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(5px) rotate(10deg); }
+            50% { transform: translateX(-5px) rotate(-10deg); }
+            75% { transform: translateX(3px) rotate(5deg); }
+            100% { transform: translateX(0) rotate(0deg); }
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            color: #ffe4b5;
+            margin-bottom: 12px;
+            animation: colorChange 3s infinite;
+        }
+
+        @keyframes colorChange {
+            0% { color: #ffe4b5; text-shadow: 0 0 5px red; }
+            25% { color: #ffb5b5; text-shadow: 0 0 5px blue; }
+            50% { color: #b5ffb5; text-shadow: 0 0 5px green; }
+            75% { color: #b5b5ff; text-shadow: 0 0 5px yellow; }
+            100% { color: #ffe4b5; text-shadow: 0 0 5px red; }
+        }
+
+        .dua-text {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            margin: 16px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 35px;
+            font-family: 'Amiri', serif;
+            font-weight: 700;
+            border: 2px solid #ffd966;
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+            color: #fff;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .fixed-phrase {
+            font-size: 1rem;
+            color: #ffd966;
+            margin: 12px 0;
+            font-weight: bold;
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 30px;
+        }
+
+        .decor i {
+            color: #ffd966;
+            margin: 0 4px;
+            font-size: 1.2rem;
+            animation: starColor 2s infinite, starMove 1.5s infinite alternate;
+        }
+
+        @keyframes starColor {
+            0% { color: #ffd966; }
+            33% { color: #ffaa00; }
+            66% { color: #ffdd55; }
+            100% { color: #ffd966; }
+        }
+
+        @keyframes starMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 20px 0 12px;
+        }
+
+        .share-btn {
+            border: none;
+            padding: 12px 18px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1 1 auto;
+            min-width: 120px;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .share-btn.copy {
+            background: linear-gradient(45deg, #f1c40f, #ffd966);
+            color: #0b2a35;
+            border: 1px solid #fff;
+        }
+
+        .share-btn.copy:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(241, 196, 15, 0.8);
+        }
+
+        .share-btn i {
+            font-size: 1.2rem;
+        }
+
+        .back-link {
+            color: #ffd966;
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: inline-block;
+            background: rgba(0,0,0,0.2);
+            padding: 8px 20px;
+            border-radius: 40px;
+            border: 1px solid #ffd966;
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            background: #ffd966;
+            color: #0b2a35;
+            transform: translateX(-5px);
+        }
+
+        .error {
+            color: #ff6b6b;
+            padding: 30px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <!-- طبقة النجوم الخلفية -->
+    <!-- خلفية نجوم متحركة -->
     <div class="stars" id="stars"></div>
     <div class="moon"></div>
 
@@ -451,10 +801,12 @@
     <div class="lantern-top-left"><i class="fas fa-moon"></i></div>
     <div class="lantern-top-right"><i class="fas fa-star"></i></div>
 
+    <!-- الصوت -->
     <audio id="ramadanSong" preload="auto" loop>
         <source src="Albumaty.Com_hmwd_alkhdr_mrhb_ya_hlal.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- زر الصوت والرسالة -->
     <div class="sound-control">
         <div id="soundToggle">
             <i class="fas fa-volume-mute" id="soundIcon"></i>
@@ -462,87 +814,48 @@
         <div class="sound-message" id="soundMessage">🔊 انقر لتشغيل الصوت</div>
     </div>
 
-    <div class="container">
-        <h1>
-            <i class="fas fa-moon"></i>
-            تهنئة رمضان
-            <i class="fas fa-star"></i>
-        </h1>
-        <div class="subtitle">اصنع تهنئتك المميزة وشاركها مع من تحب</div>
-
-        <!-- عداد تنازلي -->
-        <div class="countdown" id="countdown">
-            <div class="countdown-item"><span id="days">00</span><small>يوم</small></div>
-            <div class="countdown-item"><span id="hours">00</span><small>ساعة</small></div>
-            <div class="countdown-item"><span id="minutes">00</span><small>دقيقة</small></div>
-            <div class="countdown-item"><span id="seconds">00</span><small>ثانية</small></div>
-        </div>
-
-        <form id="greetingForm" class="form-section">
-            <div class="form-group">
-                <label><i class="fas fa-user"></i> الاسم / الأسماء</label>
-                <input type="text" id="names" placeholder="أدخل اسمك" required>
-            </div>
-
-            <!-- اختيار الجندر -->
-            <div class="form-group">
-                <label><i class="fas fa-venus-mars"></i> الجنس</label>
-                <div class="gender-options">
-                    <label class="gender-option" id="genderMale">
-                        <i class="fas fa-mars"></i>
-                        <span>ذكر</span>
-                        <input type="radio" name="gender" value="male" checked>
-                    </label>
-                    <label class="gender-option" id="genderFemale">
-                        <i class="fas fa-venus"></i>
-                        <span>أنثى</span>
-                        <input type="radio" name="gender" value="female">
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label><i class="fas fa-hand-pray"></i> اختر دعاء</label>
-                <select id="duaSelect">
-                    <option value="">-- اختر دعاء --</option>
-                    <option value="اللهم بلغنا رمضان لا فاقدين ولا مفقودين">اللهم بلغنا رمضان لا فاقدين ولا مفقودين</option>
-                    <option value="اللهم اجعلنا فيه من عتقائك من النار">اللهم اجعلنا فيه من عتقائك من النار</option>
-                    <option value="اللهم أعنا على الصيام والقيام">اللهم أعنا على الصيام والقيام</option>
-                    <option value="اللهم تقبل منا صالح الأعمال">اللهم تقبل منا صالح الأعمال</option>
-                    <option value="اللهم اجعل شهر رمضان شهر خير وبركة">اللهم اجعل شهر رمضان شهر خير وبركة</option>
-                    <option value="اللهم اجعل صيامي فيه صيام الصائمين وقيامي فيه قيام القائمين">اللهم اجعل صيامي فيه صيام الصائمين وقيامي فيه قيام القائمين</option>
-                    <option value="اللهم ارزقنا فيه رحمة واسعة واغفر لنا ذنوبنا">اللهم ارزقنا فيه رحمة واسعة واغفر لنا ذنوبنا</option>
-                    <option value="اللهم اجعلنا فيه من المقبولين ومن عتقائك من النار">اللهم اجعلنا فيه من المقبولين ومن عتقائك من النار</option>
-                    <option value="اللهم إني أسألك فيه الجنة وما قرب إليها من قول وعمل">اللهم إني أسألك فيه الجنة وما قرب إليها من قول وعمل</option>
-                    <option value="اللهم اجعل لنا في هذا الشهر نصيباً من رحمتك ومغفرتك">اللهم اجعل لنا في هذا الشهر نصيباً من رحمتك ومغفرتك</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label><i class="fas fa-pen"></i> أو اكتب دعاء خاص (200 حرف)</label>
-                <textarea id="customDua" maxlength="200" placeholder="اكتب دعاءك هنا..."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label><i class="fas fa-palette"></i> خلفية التهنئة</label>
-                <div class="bg-options">
-                    <div class="bg-option selected" data-bg="1" onclick="selectBg(1)"></div>
-                    <div class="bg-option" data-bg="2" onclick="selectBg(2)"></div>
-                    <div class="bg-option" data-bg="3" onclick="selectBg(3)"></div>
-                    <div class="bg-option" data-bg="4" onclick="selectBg(4)"></div>
-                    <div class="bg-option" data-bg="5" onclick="selectBg(5)"></div>
-                </div>
-                <input type="hidden" id="selectedBg" value="1">
-            </div>
-
-            <button type="submit" class="btn"><i class="fas fa-gift"></i> أنشئ التهنئة</button>
-        </form>
-
-        <div class="footer-note">✨ كل عام وأنتم بخير ✨</div>
-    </div>
+    <!-- المحتوى الرئيسي: إما النموذج أو التهنئة -->
+    <div class="container" id="appContainer"></div>
 
     <script>
-        // إنشاء النجوم عشوائياً
+        // ---------- إعدادات ثابتة ----------
+        const duas = [
+            "اللهم بلغنا رمضان لا فاقدين ولا مفقودين",
+            "اللهم اجعلنا فيه من عتقائك من النار",
+            "اللهم أعنا على الصيام والقيام",
+            "اللهم تقبل منا صالح الأعمال",
+            "اللهم اجعل شهر رمضان شهر خير وبركة",
+            "اللهم اجعل صيامي فيه صيام الصائمين وقيامي فيه قيام القائمين",
+            "اللهم ارزقنا فيه رحمة واسعة واغفر لنا ذنوبنا",
+            "اللهم اجعلنا فيه من المقبولين ومن عتقائك من النار",
+            "اللهم إني أسألك فيه الجنة وما قرب إليها من قول وعمل",
+            "اللهم اجعل لنا في هذا الشهر نصيباً من رحمتك ومغفرتك"
+        ];
+        const fixedPhrase = 'أعاده الله علينا وعليكم بالخير واليمن والبركات';
+
+        // ---------- عناصر الصوت ----------
+        const song = document.getElementById('ramadanSong');
+        const soundIcon = document.getElementById('soundIcon');
+        const soundMessage = document.getElementById('soundMessage');
+        let soundEnabled = false; // معطل افتراضياً
+
+        function updateSoundUI() {
+            soundIcon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
+            soundMessage.style.display = soundEnabled ? 'none' : 'block';
+        }
+
+        document.getElementById('soundToggle').addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            updateSoundUI();
+            if (soundEnabled) {
+                song.play().catch(e => console.log('تشغيل الصوت'));
+            } else {
+                song.pause();
+            }
+        });
+        updateSoundUI();
+
+        // ---------- النجوم ----------
         function createStars() {
             const starsContainer = document.getElementById('stars');
             for (let i = 0; i < 100; i++) {
@@ -560,7 +873,7 @@
         }
         createStars();
 
-        // ألعاب نارية مستمرة كل 2.5 ثانية
+        // ---------- ألعاب نارية مستمرة ----------
         function launchConfetti() {
             confetti({
                 particleCount: 100,
@@ -572,16 +885,12 @@
         launchConfetti();
         setInterval(launchConfetti, 2500);
 
-        // ---------- عداد رمضان حقيقي (19 فبراير 2026) ----------
-        function getRamadanDate() {
-            return new Date(2026, 1, 19);
-        }
-
+        // ---------- عداد رمضان ----------
+        function getRamadanDate() { return new Date(2026, 1, 19); }
         function updateCountdown() {
             const ramadanDate = getRamadanDate();
             const now = new Date();
             const diff = ramadanDate - now;
-
             if (diff <= 0) {
                 document.getElementById('days').innerText = '00';
                 document.getElementById('hours').innerText = '00';
@@ -589,99 +898,217 @@
                 document.getElementById('seconds').innerText = '00';
                 return;
             }
-
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
             document.getElementById('days').innerText = days.toString().padStart(2, '0');
             document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
             document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
             document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
         }
-
         setInterval(updateCountdown, 1000);
-        updateCountdown();
 
-        // ---------- الصوت (معطل افتراضياً مع رسالة) ----------
-        const song = document.getElementById('ramadanSong');
-        const soundIcon = document.getElementById('soundIcon');
-        const soundMessage = document.getElementById('soundMessage');
-        let soundEnabled = false; // معطل افتراضياً
+        // ---------- عرض المحتوى حسب المسار ----------
+        function renderContent() {
+            const path = window.location.pathname; // مثلاً "/greeting/عبدالله/ذكر/6/1"
+            const parts = path.split('/').filter(p => p);
 
-        function updateSoundUI() {
-            soundIcon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
-            if (soundEnabled) {
-                soundMessage.style.display = 'none'; // إخفاء الرسالة بعد التشغيل
+            if (parts.length >= 5 && parts[0] === 'greeting') {
+                // مسار التهنئة
+                const names = decodeURIComponent(parts[1]);
+                const gender = parts[2];
+                const duaId = parts[3];
+                const bg = parts[4] || '1';
+
+                // تطبيق الخلفية
+                document.body.className = `bg${bg}`;
+
+                // الحصول على نص الدعاء
+                let duaText;
+                if (duaId === '0') {
+                    duaText = localStorage.getItem('custom_dua') || 'دعاء خاص';
+                } else {
+                    duaText = duas[parseInt(duaId) - 1] || 'دعاء غير محدد';
+                }
+
+                // تنسيق الأسماء المتعددة
+                let displayNames = names;
+                if (names.includes(',')) {
+                    const parts = names.split(',').map(s => s.trim());
+                    if (parts.length === 2) displayNames = `${parts[0]} و ${parts[1]}`;
+                    else if (parts.length > 2) displayNames = parts.slice(0, -1).join('، ') + ' و ' + parts.slice(-1);
+                }
+
+                const greetingWord = gender === 'male' ? 'يهنئكم' : 'تهنئكم';
+
+                // عرض التهنئة
+                document.getElementById('appContainer').innerHTML = `
+                    <div class="greeting-card">
+                        <div class="names-list">${displayNames}</div>
+                        <h1><i class="fas fa-star"></i> ${greetingWord} <i class="fas fa-star"></i></h1>
+                        <h2>بحلول شهر رمضان المبارك</h2>
+                        <div class="dua-text">${duaText}</div>
+                        <p class="fixed-phrase">${fixedPhrase}</p>
+                        <div class="decor">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <i class="fas fa-moon"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="share-btn copy" id="copyLinkBtn"><i class="fas fa-copy"></i> نسخ الرابط</button>
+                    </div>
+                    <a href="/" class="back-link" onclick="event.preventDefault(); navigateTo('/');"><i class="fas fa-arrow-right"></i> أنشئ تهنئة جديدة</a>
+                `;
+
+                // زر نسخ الرابط
+                document.getElementById('copyLinkBtn').addEventListener('click', () => {
+                    navigator.clipboard.writeText(window.location.href).then(() => {
+                        alert('✅ تم نسخ الرابط النظيف!');
+                    });
+                });
+
             } else {
-                soundMessage.style.display = 'block';
+                // الصفحة الرئيسية: عرض نموذج الإنشاء
+                document.body.className = 'bg1'; // خلفية افتراضية
+                document.getElementById('appContainer').innerHTML = `
+                    <h1><i class="fas fa-moon"></i> تهنئة رمضان <i class="fas fa-star"></i></h1>
+                    <div class="subtitle">اصنع تهنئتك المميزة وشاركها مع من تحب</div>
+
+                    <div class="countdown" id="countdown">
+                        <div class="countdown-item"><span id="days">00</span><small>يوم</small></div>
+                        <div class="countdown-item"><span id="hours">00</span><small>ساعة</small></div>
+                        <div class="countdown-item"><span id="minutes">00</span><small>دقيقة</small></div>
+                        <div class="countdown-item"><span id="seconds">00</span><small>ثانية</small></div>
+                    </div>
+
+                    <form id="greetingForm" class="form-section">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> الاسم / الأسماء</label>
+                            <input type="text" id="names" placeholder="أدخل اسمك" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-venus-mars"></i> الجنس</label>
+                            <div class="gender-options">
+                                <label class="gender-option selected" id="genderMale">
+                                    <i class="fas fa-mars"></i><span>ذكر</span>
+                                    <input type="radio" name="gender" value="male" checked>
+                                </label>
+                                <label class="gender-option" id="genderFemale">
+                                    <i class="fas fa-venus"></i><span>أنثى</span>
+                                    <input type="radio" name="gender" value="female">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-hand-pray"></i> اختر دعاء</label>
+                            <select id="duaSelect">
+                                <option value="">-- اختر دعاء --</option>
+                                ${duas.map((dua, index) => `<option value="${index+1}">${dua}</option>`).join('')}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-pen"></i> أو اكتب دعاء خاص (200 حرف)</label>
+                            <textarea id="customDua" maxlength="200" placeholder="اكتب دعاءك هنا..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-palette"></i> خلفية التهنئة</label>
+                            <div class="bg-options">
+                                <div class="bg-option selected" data-bg="1" onclick="selectBg(1)"></div>
+                                <div class="bg-option" data-bg="2" onclick="selectBg(2)"></div>
+                                <div class="bg-option" data-bg="3" onclick="selectBg(3)"></div>
+                                <div class="bg-option" data-bg="4" onclick="selectBg(4)"></div>
+                                <div class="bg-option" data-bg="5" onclick="selectBg(5)"></div>
+                            </div>
+                            <input type="hidden" id="selectedBg" value="1">
+                        </div>
+
+                        <button type="submit" class="btn"><i class="fas fa-gift"></i> أنشئ التهنئة</button>
+                    </form>
+
+                    <div class="footer-note">✨ كل عام وأنتم بخير ✨</div>
+                `;
+
+                // إعادة تشغيل العداد
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+
+                // إعادة ربط أحداث النموذج
+                setupForm();
             }
         }
 
-        document.getElementById('soundToggle').addEventListener('click', () => {
-            soundEnabled = !soundEnabled;
-            updateSoundUI();
-            if (soundEnabled) {
-                song.play().catch(e => console.log('تشغيل الصوت'));
-            } else {
-                song.pause();
-            }
-        });
+        // ---------- التنقل بدون إعادة تحميل ----------
+        function navigateTo(path) {
+            history.pushState(null, '', path);
+            renderContent();
+        }
 
-        // إخفاء الرسالة إذا تم تشغيل الصوت من أي تفاعل آخر (اختياري)
-        updateSoundUI();
-
-        // ---------- اختيار الخلفية ----------
-        window.selectBg = function(bgId) {
-            document.querySelectorAll('.bg-option').forEach(opt => opt.classList.remove('selected'));
-            document.querySelector(`.bg-option[data-bg="${bgId}"]`).classList.add('selected');
-            document.getElementById('selectedBg').value = bgId;
-        };
-
-        // ---------- تحديد الجندر ----------
-        document.querySelectorAll('.gender-option').forEach(opt => {
-            opt.addEventListener('click', function() {
-                document.querySelectorAll('.gender-option').forEach(o => o.classList.remove('selected'));
-                this.classList.add('selected');
-                this.querySelector('input[type="radio"]').checked = true;
+        // ---------- إعداد أحداث النموذج ----------
+        function setupForm() {
+            // تحديد الجندر
+            document.querySelectorAll('.gender-option').forEach(opt => {
+                opt.addEventListener('click', function() {
+                    document.querySelectorAll('.gender-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    this.querySelector('input[type="radio"]').checked = true;
+                });
             });
-        });
 
-        // ---------- معالجة النموذج ----------
-        document.getElementById('greetingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            // اختيار الخلفية
+            window.selectBg = function(bgId) {
+                document.querySelectorAll('.bg-option').forEach(opt => opt.classList.remove('selected'));
+                document.querySelector(`.bg-option[data-bg="${bgId}"]`).classList.add('selected');
+                document.getElementById('selectedBg').value = bgId;
+            };
 
-            const names = document.getElementById('names').value.trim();
-            if (!names) {
-                alert('الرجاء إدخال اسم');
-                return;
-            }
+            // معالجة النموذج
+            document.getElementById('greetingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
 
-            const gender = document.querySelector('input[name="gender"]:checked').value;
+                const names = document.getElementById('names').value.trim();
+                if (!names) { alert('الرجاء إدخال اسم'); return; }
 
-            const duaSelect = document.getElementById('duaSelect').value;
-            const customDua = document.getElementById('customDua').value.trim();
-            let duaText = '';
+                const gender = document.querySelector('input[name="gender"]:checked').value;
 
-            if (customDua) {
-                duaText = customDua;
-            } else if (duaSelect) {
-                duaText = duaSelect;
-            } else {
-                alert('اختر دعاء أو اكتب دعاء خاص');
-                return;
-            }
+                const duaSelect = document.getElementById('duaSelect').value;
+                const customDua = document.getElementById('customDua').value.trim();
+                let duaId = '';
 
-            const bg = document.getElementById('selectedBg').value;
+                if (customDua) {
+                    localStorage.setItem('custom_dua', customDua);
+                    duaId = '0';
+                } else if (duaSelect) {
+                    duaId = duaSelect;
+                } else {
+                    alert('اختر دعاء أو اكتب دعاء خاص');
+                    return;
+                }
 
-            localStorage.setItem('ramadan_names', names);
-            localStorage.setItem('ramadan_gender', gender);
-            localStorage.setItem('ramadan_duaText', duaText);
-            localStorage.setItem('ramadan_bg', bg);
+                const bg = document.getElementById('selectedBg').value;
 
-            window.location.href = `greeting.html?names=${encodeURIComponent(names)}&gender=${gender}&dua=${encodeURIComponent(duaText)}&bg=${bg}`;
-        });
+                // حفظ في localStorage (كنسخة احتياطية)
+                localStorage.setItem('ramadan_names', names);
+                localStorage.setItem('ramadan_gender', gender);
+                localStorage.setItem('ramadan_bg', bg);
+
+                // التنقل إلى المسار النظيف
+                navigateTo(`/greeting/${encodeURIComponent(names)}/${gender}/${duaId}/${bg}`);
+            });
+        }
+
+        // ---------- الاستماع لتغيرات التاريخ (الرجوع للأمام/الخلف) ----------
+        window.addEventListener('popstate', renderContent);
+
+        // ---------- التشغيل الأولي ----------
+        renderContent();
     </script>
 </body>
 </html>
+
+
