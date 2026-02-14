@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جاري التحميل...</title>
+    <style>
+        body { background: #0b2f3a; color: #ffd966; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Cairo', sans-serif; flex-direction: column; }
+    </style>
+</head>
+<body>
+    <p>جاري تحميل التهنئة...</p>
+    <script>
+        // حفظ المسار الكامل (مع أي معاملات)
+        const fullPath = window.location.pathname + window.location.search + window.location.hash;
+        sessionStorage.redirect = fullPath;
+        // التوجيه إلى الصفحة الرئيسية
+        window.location.replace('/Ramadan-Kareem/');
+    </script>
+</body>
+</html>
