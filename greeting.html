@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>تهنئتك الرمضانية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 8px;
+            color: #fff;
+            transition: background 0.3s;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* خلفية نجوم متحركة */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* هلال محسن */
+        .moon {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            width: 120px;
+            height: 120px;
+            background: transparent;
+            border-radius: 50%;
+            box-shadow: -25px 12px 0 0 rgba(255, 215, 0, 0.6);
+            transform: rotate(45deg);
+            z-index: 0;
+            animation: floatMoon 8s infinite alternate;
+            filter: drop-shadow(0 0 20px gold);
+        }
+
+        @keyframes floatMoon {
+            0% { transform: rotate(45deg) translateY(0); }
+            100% { transform: rotate(45deg) translateY(-20px); }
+        }
+
+        /* فوانيس متحركة (4) */
+        .lantern-bottom-left {
+            position: fixed;
+            bottom: 20px;
+            left: 10px;
+            font-size: 3rem;
+            color: #ffd966;
+            z-index: 999;
+            animation: swingLeft 3s infinite alternate;
+            filter: drop-shadow(0 0 10px orange);
+
+        }
+
+        .lantern-bottom-right {
+            position: fixed;
+            bottom: 20px;
+            right: 10px;
+            font-size: 3rem;
+            color: #ffd966;
+            z-index: 0;
+            animation: swingRight 3s infinite alternate;
+            filter: drop-shadow(0 0 10px orange);
+            z-index: 999;
+        }
+
+        .lantern-top-left {
+            position: fixed;
+            top: 20px;
+            left: 10px;
+            font-size: 2.5rem;
+            color: #ffd966;
+            z-index: 0;
+            animation: swingLeft 2.5s infinite alternate-reverse;
+            filter: drop-shadow(0 0 8px orange);
+            z-index: 999;
+        }
+        
+
+        .lantern-top-right {
+            position: fixed;
+            top: 20px;
+            right: 10px;
+            font-size: 2.5rem;
+            color: #ffd966;
+            z-index: 0;
+            animation: swingRight 2.5s infinite alternate-reverse;
+            filter: drop-shadow(0 0 8px orange);
+            z-index: 999;
+        }
+
+        @keyframes swingLeft {
+            0% { transform: translateX(0) rotate(0deg); }
+            100% { transform: translateX(-10px) rotate(-5deg); }
+        }
+
+        @keyframes swingRight {
+            0% { transform: translateX(0) rotate(0deg); }
+            100% { transform: translateX(10px) rotate(5deg); }
+        }
+
+        body.bg1 { background: linear-gradient(145deg, #0b2a35, #1a4d5e); }
+        body.bg2 { background: linear-gradient(145deg, #4a1e2c, #972b3f); }
+        body.bg3 { background: linear-gradient(145deg, #1e4a3a, #2e8b57); }
+        body.bg4 { background: linear-gradient(145deg, #5e3a1e, #b8860b); }
+        body.bg5 { background: linear-gradient(145deg, #2c3e50, #3498db); }
+
+        .sound-control {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 10;
+        }
+
+        #soundToggle {
+            background: rgba(0,0,0,0.3);
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid #ffd966;
+            transition: 0.2s;
+            font-size: 1.2rem;
+            backdrop-filter: blur(4px);
+        }
+
+        #soundToggle:hover {
+            background: #ffd966;
+            color: #0b2a35;
+        }
+
+        .container {
+            max-width: 380px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 20px 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,215,0,0.3);
+            position: relative;
+            z-index: 1;
+            margin-top: 2px;
+        }
+
+        .greeting-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 28px;
+            padding: 20px 16px;
+            margin-bottom: 20px;
+            border: 2px solid #ffd966;
+            text-align: center;
+        }
+
+        .names-list {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffd966;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 18px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 8px;
+            border: 1px solid #ffd966;
+            animation: colorChange1 3s infinite, glow 2s infinite;
+        }
+
+        @keyframes colorChange1 {
+            0% { color: #ffe4b5; text-shadow: 0 0 5px red; }
+            25% { color: #ffb5b5; text-shadow: 0 0 5px blue; }
+            50% { color: #b5ffb5; text-shadow: 0 0 5px green; }
+            75% { color: #b5b5ff; text-shadow: 0 0 5px yellow; }
+            100% { color: #ffe4b5; text-shadow: 0 0 5px red; }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #ffd966; }
+            50% { text-shadow: 0 0 20px #ffd966, 0 0 30px #ffaa00; }
+            100% { text-shadow: 0 0 5px #ffd966; }
+        }
+
+        h1 {
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        h1 i {
+            color: #ffd966;
+            font-size: 1.8rem;
+            animation: starDance 2s infinite alternate;
+        }
+
+        @keyframes starDance {
+            0% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(5px) rotate(10deg); }
+            50% { transform: translateX(-5px) rotate(-10deg); }
+            75% { transform: translateX(3px) rotate(5deg); }
+            100% { transform: translateX(0) rotate(0deg); }
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            color: #ffe4b5;
+            margin-bottom: 12px;
+            animation: colorChange 3s infinite;
+        }
+
+        @keyframes colorChange {
+            0% { color: #ffe4b5; text-shadow: 0 0 5px red; }
+            25% { color: #ffb5b5; text-shadow: 0 0 5px blue; }
+            50% { color: #b5ffb5; text-shadow: 0 0 5px green; }
+            75% { color: #b5b5ff; text-shadow: 0 0 5px yellow; }
+            100% { color: #ffe4b5; text-shadow: 0 0 5px red; }
+        }
+
+        /* تحسين صندوق الدعاء */
+        .dua-text {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            margin: 16px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 35px;
+            font-family: 'Amiri', serif;
+            font-weight: 700;
+            border: 2px solid #ffd966;
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+            color: #fff;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .fixed-phrase {
+            font-size: 1rem;
+            color: #ffd966;
+            margin: 12px 0;
+            font-weight: bold;
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 30px;
+        }
+
+        .decor i {
+            color: #ffd966;
+            margin: 0 4px;
+            font-size: 1.2rem;
+            animation: starColor 2s infinite, starMove 1.5s infinite alternate;
+        }
+
+        @keyframes starColor {
+            0% { color: #ffd966; }
+            33% { color: #ffaa00; }
+            66% { color: #ffdd55; }
+            100% { color: #ffd966; }
+        }
+
+        @keyframes starMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 20px 0 12px;
+        }
+
+        .share-btn {
+            border: none;
+            padding: 12px 18px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1 1 auto;
+            min-width: 120px;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .share-btn.copy {
+            background: linear-gradient(45deg, #f1c40f, #ffd966);
+            color: #0b2a35;
+            border: 1px solid #fff;
+        }
+
+        .share-btn.copy:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(241, 196, 15, 0.8);
+        }
+
+        .share-btn i {
+            font-size: 1.2rem;
+        }
+
+        .back-link {
+            color: #ffd966;
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: inline-block;
+            background: rgba(0,0,0,0.2);
+            padding: 8px 20px;
+            border-radius: 40px;
+            border: 1px solid #ffd966;
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            background: #ffd966;
+            color: #0b2a35;
+            transform: translateX(-5px);
+        }
+
+        .error {
+            color: #ff6b6b;
+            padding: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg1">
+    <!-- طبقة النجوم الخلفية -->
+    <div class="stars" id="stars"></div>
+    <div class="moon"></div>
+
+    <!-- فوانيس متحركة -->
+    <div class="lantern-top-left"><i class="fas fa-mosque"></i></div>
+
+    <!-- عنصر الصوت وزر التحكم -->
+    <audio id="ramadanSong" preload="auto" loop>
+        <source src="Albumaty.Com_hmwd_alkhdr_mrhb_ya_hlal.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="sound-control">
+        <div id="soundToggle">
+            <i class="fas fa-volume-up" id="soundIcon"></i>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="greeting-card" id="greetingCard"></div>
+
+        <div class="actions" id="shareActions"></div>
+
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-right"></i> أنشئ تهنئة خاصة بك</a>
+    </div>
+
+    <script>
+        // إنشاء النجوم
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 80; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                star.style.animationDuration = Math.random() * 3 + 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // ألعاب نارية مستمرة كل 2.5 ثانية
+        function launchConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ffd966', '#ffaa00', '#ffdd55', '#ffffff']
+            });
+        }
+        launchConfetti();
+        setInterval(launchConfetti, 2500);
+
+        // ---------- الصوت ----------
+        const song = document.getElementById('ramadanSong');
+        const soundIcon = document.getElementById('soundIcon');
+        let soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
+
+        function updateSoundUI() {
+            soundIcon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
+        }
+
+        document.getElementById('soundToggle').addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            localStorage.setItem('soundEnabled', soundEnabled);
+            updateSoundUI();
+            if (soundEnabled) {
+                song.play().catch(e => console.log('تشغيل الصوت يحتاج تفاعل'));
+            } else {
+                song.pause();
+            }
+        });
+
+        document.body.addEventListener('click', function initAudio() {
+            if (soundEnabled) {
+                song.play().catch(() => {});
+            }
+            document.body.removeEventListener('click', initAudio);
+        }, { once: true });
+
+        updateSoundUI();
+
+        // ---------- عرض التهنئة مع مراعاة الجندر ----------
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            let names = params.get('names');
+            let gender = params.get('gender');
+            let duaText = params.get('dua');
+            let bg = params.get('bg') || '1';
+
+            if (!names || !duaText || !gender) {
+                names = localStorage.getItem('ramadan_names');
+                gender = localStorage.getItem('ramadan_gender');
+                duaText = localStorage.getItem('ramadan_duaText');
+                bg = localStorage.getItem('ramadan_bg') || '1';
+            }
+
+            if (!names || !duaText || !gender) {
+                document.getElementById('greetingCard').innerHTML = '<div class="error">لا توجد بيانات. الرجاء إنشاء تهنئة أولاً.</div>';
+                return;
+            }
+
+            document.body.className = `bg${bg}`;
+
+            // تنسيق الأسماء المتعددة
+            let displayNames = names;
+            if (names.includes(',')) {
+                const parts = names.split(',').map(s => s.trim());
+                if (parts.length === 2) displayNames = `${parts[0]} و ${parts[1]}`;
+                else if (parts.length > 2) displayNames = parts.slice(0, -1).join('، ') + ' و ' + parts.slice(-1);
+            }
+
+            // اختيار كلمة التهنئة حسب الجندر
+            const greetingWord = gender === 'male' ? 'يهنئكم' : 'تهنئكم';
+            const fixedPhrase = 'أعاده الله علينا وعليكم بالخير واليمن والبركات';
+
+            document.getElementById('greetingCard').innerHTML = `
+                <div class="names-list">${displayNames}</div>
+                <h1><i class="fas fa-star"></i> ${greetingWord} <i class="fas fa-star"></i></h1>
+                <h2>بحلول شهر رمضان المبارك</h2>
+                <div class="dua-text">${duaText}</div>
+                <p class="fixed-phrase">${fixedPhrase}</p>
+                <div class="decor">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+            `;
+
+            // زر النسخ
+            const shareActions = document.getElementById('shareActions');
+            const currentUrl = window.location.href;
+
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'share-btn copy';
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i> نسخ الرابط';
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(currentUrl).then(() => {
+                    alert('تم نسخ الرابط!');
+                }).catch(() => {
+                    alert('فشل النسخ، يمكنك نسخ الرابط يدوياً.');
+                });
+            });
+
+            shareActions.innerHTML = '';
+            shareActions.appendChild(copyBtn);
+        })();
+    </script>
+</body>
+</html>

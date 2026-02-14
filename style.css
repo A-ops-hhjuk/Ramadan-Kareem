@@ -1,0 +1,298 @@
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(145deg, #0b2a35 0%, #1a4d5e 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #fff;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 40px 30px;
+    box-shadow: 0 25px 40px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,215,0,0.3);
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Amiri', serif;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #ffd966;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+h1 i {
+    margin: 0 10px;
+    color: #f1c40f;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    text-align: right;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #ffd966;
+    font-size: 1.1rem;
+}
+
+.form-group label i {
+    margin-left: 8px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,215,0,0.5);
+    color: #fff;
+    font-size: 1rem;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #ffd966;
+    background: rgba(255,255,255,0.2);
+    box-shadow: 0 0 15px rgba(255,215,0,0.5);
+}
+
+.form-group input::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+.form-group select option {
+    background: #1a4d5e;
+    color: #fff;
+}
+
+.btn {
+    background: #f1c40f;
+    color: #0b2a35;
+    border: none;
+    padding: 16px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn:hover {
+    background: #ffd966;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+}
+
+.btn i {
+    font-size: 1.3rem;
+}
+
+/* أمثلة سريعة */
+.examples {
+    margin-top: 40px;
+}
+
+.examples p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.example-cards {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: rgba(255,215,0,0.2);
+    border: 1px solid #ffd966;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.card:hover {
+    background: #ffd966;
+    color: #0b2a35;
+    transform: scale(1.05);
+}
+
+/* صفحة التهنئة */
+.greeting-card {
+    background: rgba(255,255,255,0.15);
+    border-radius: 30px;
+    padding: 30px 20px;
+    margin-bottom: 30px;
+    border: 2px solid #ffd966;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: fadeInUp 0.8s ease;
+}
+
+.greeting-card h1 {
+    font-size: 2.2rem;
+    color: #fff;
+    text-shadow: 2px 2px 0 #b8860b;
+    margin-bottom: 5px;
+}
+
+.greeting-card h1 span {
+    color: #ffd966;
+}
+
+.greeting-card h2 {
+    font-size: 1.8rem;
+    color: #ffd966;
+    margin-bottom: 25px;
+    font-family: 'Amiri', serif;
+}
+
+.dua-text {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    margin: 25px 0;
+    padding: 20px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 20px;
+    font-family: 'Amiri', serif;
+    border-right: 5px solid #ffd966;
+    text-align: center;
+}
+
+.fixed-phrase {
+    font-size: 1.3rem;
+    color: #ffe4b5;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.decor i {
+    color: #ffd966;
+    margin: 0 5px;
+    font-size: 1.5rem;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin: 30px 0 20px;
+}
+
+.share-btn {
+    width: auto;
+    min-width: 120px;
+    flex: 1 1 auto;
+    padding: 12px 20px;
+    font-size: 1rem;
+}
+
+.share-btn.whatsapp {
+    background: #25D366;
+    color: #fff;
+}
+.share-btn.twitter {
+    background: #1DA1F2;
+    color: #fff;
+}
+.share-btn.facebook {
+    background: #1877F2;
+    color: #fff;
+}
+
+.back-link {
+    color: #ffd966;
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: inline-block;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.back-link:hover {
+    color: #fff;
+    transform: translateX(-5px);
+}
+
+/* حركات */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* خطأ */
+.error {
+    color: #ff6b6b;
+    font-size: 1.2rem;
+    padding: 30px;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .container {
+        padding: 30px 20px;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    .greeting-card h1 {
+        font-size: 1.8rem;
+    }
+    .greeting-card h2 {
+        font-size: 1.5rem;
+    }
+    .dua-text {
+        font-size: 1.2rem;
+    }
+    .actions {
+        flex-direction: column;
+    }
+    .share-btn {
+        width: 100%;
+    }
+}
